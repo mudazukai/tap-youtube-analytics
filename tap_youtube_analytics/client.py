@@ -137,6 +137,8 @@ def get_paginated_data(client, url, path, endpoint, params, data_key='items'):
     page_token = ''
 
     while is_next_page:
+        if page == 1:
+            del params['pageToken']
         if page > 1:
             params['pageToken'] = page_token
 
@@ -176,7 +178,7 @@ def get_paginated_data(client, url, path, endpoint, params, data_key='items'):
             total_results))
 
         if not results or results is None or results == []:
-            break
+            yield None
 
         for result in data.get(data_key, []):
             yield result
