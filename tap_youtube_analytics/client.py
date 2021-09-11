@@ -176,7 +176,7 @@ def get_paginated_data(client, url, path, endpoint, params, data_key='items'):
             total_results))
 
         if not results or results is None or results == []:
-            yield None
+            break
 
         for result in data.get(data_key, []):
             yield result
